@@ -54,16 +54,18 @@
                     return;
                 }
 
-                const urlapi = `http://api.weatherapi.com/v1/current.json?key=9d398e88dbf9401fbaf65907250710&q=Indonesia&aqi=no`;
+                const urlapi = `http://api.weatherapi.com/v1/current.json?key=9d398e88dbf9401fbaf65907250710&q=${lokasi}&aqi=no`;
 
                 $.ajax({
                     url: urlapi,
                     method: "GET",
                     success: function(data){
                         console.log(data);
+                        
                         $("#suhuC").text(data.current.temp_c);
                         $("#suhuF").text(data.current.temp_f);
                         $("#kelembaban").text(data.current.humidity);
+                        
                         
                         $("#negara").text(data.location.country);
                         $("#provinsi").text(data.location.region);
@@ -87,6 +89,7 @@
                 });
             });
         });
+        
     </script>
 </body>
 </html>
