@@ -31,7 +31,7 @@
             <h3>Cuaca</h3>
             <p>Suhu Celcius: <span id="suhuC">...</span> °C</p>
             <p>Suhu Fahrenheit: <span id="suhuF">...</span> °F</p>
-            <p>Kelembaban: <span id="kelembaban">...</span> %</p>
+            <p>Kelembapan: <span id="kelembapan">...</span> %</p>
         </div>
 
         <div id="locationInfo">
@@ -64,7 +64,7 @@
                         
                         $("#suhuC").text(data.current.temp_c);
                         $("#suhuF").text(data.current.temp_f);
-                        $("#kelembaban").text(data.current.humidity);
+                        $("#kelembapan").text(data.current.humidity);
                         
                         
                         $("#negara").text(data.location.country);
@@ -79,7 +79,7 @@
                         
                         $("#suhuC").text("...");
                         $("#suhuF").text("...");
-                        $("#kelembaban").text("...");
+                        $("#kelembapan").text("...");
                         $("#negara").text("...");
                         $("#provinsi").text("...");
                         $("#kecamatan").text("...");
@@ -89,7 +89,7 @@
                 });
             });
         });
-        
+
     </script>
 </body>
 </html>
