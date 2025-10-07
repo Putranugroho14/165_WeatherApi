@@ -65,16 +65,24 @@
                         $("#suhuF").text(data.current.temp_f);
                         $("#kelembaban").text(data.current.humidity);
                         
-                        
+                        $("#negara").text(data.location.country);
+                        $("#provinsi").text(data.location.region);
+                        $("#kecamatan").text(data.location.name);
+                        $("#longitude").text(data.location.lon);
+                        $("#latitude").text(data.location.lat);
                     },
                     error: function(error){
                         console.log(error);
                         alert("Lokasi tidak ditemukan atau terjadi kesalahan. Mohon coba nama lokasi lain.");
-
+                        
                         $("#suhuC").text("...");
                         $("#suhuF").text("...");
                         $("#kelembaban").text("...");
-                        
+                        $("#negara").text("...");
+                        $("#provinsi").text("...");
+                        $("#kecamatan").text("...");
+                        $("#longitude").text("...");
+                        $("#latitude").text("...");
                     },
                 });
             });
