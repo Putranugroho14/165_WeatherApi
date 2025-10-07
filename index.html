@@ -27,68 +27,10 @@
             <button id="getButton">GET</button>
         </div>
 
-        <div id="weatherInfo">
-            <h3>Cuaca</h3>
-            <p>Suhu Celcius: <span id="suhuC">...</span> °C</p>
-            <p>Suhu Fahrenheit: <span id="suhuF">...</span> °F</p>
-            <p>Kelembaban: <span id="kelembaban">...</span> %</p>
-        </div>
 
-        <div id="locationInfo">
-            <h3>Lokasi</h3>
-            <p>Negara: <span id="negara">...</span></p>
-            <p>Provinsi: <span id="provinsi">...</span></p>
-            <p>Kecamatan: <span id="kecamatan">...</span></p>
-            <p>Longitude: <span id="longitude">...</span></p>
-            <p>Latitude: <span id="latitude">...</span></p>
-        </div>
+        
     </div>
 
-    <script>
-        $(document).ready(function(){
-            $("#getButton").click(function(){
-                const lokasi = $("#lokasiInput").val();
-
-                if (lokasi.trim() === "") {
-                    alert("Mohon masukkan nama lokasi.");
-                    return;
-                }
-
-                const urlapi = `http://api.weatherapi.com/v1/current.json?key=9d398e88dbf9401fbaf65907250710&q=${lokasi}&aqi=no`;
-
-                $.ajax({
-                    url: urlapi,
-                    method: "GET",
-                    success: function(data){
-                        console.log(data);
-                        // Mengisi data cuaca
-                        $("#suhuC").text(data.current.temp_c);
-                        $("#suhuF").text(data.current.temp_f);
-                        $("#kelembaban").text(data.current.humidity);
-                        
-                        // Mengisi data lokasi
-                        $("#negara").text(data.location.country);
-                        $("#provinsi").text(data.location.region);
-                        $("#kecamatan").text(data.location.name);
-                        $("#longitude").text(data.location.lon);
-                        $("#latitude").text(data.location.lat);
-                    },
-                    error: function(error){
-                        console.log(error);
-                        alert("Lokasi tidak ditemukan atau terjadi kesalahan. Mohon coba nama lokasi lain.");
-                        // Mereset tampilan
-                        $("#suhuC").text("...");
-                        $("#suhuF").text("...");
-                        $("#kelembaban").text("...");
-                        $("#negara").text("...");
-                        $("#provinsi").text("...");
-                        $("#kecamatan").text("...");
-                        $("#longitude").text("...");
-                        $("#latitude").text("...");
-                    },
-                });
-            });
-        });
-    </script>
+    
 </body>
 </html>
