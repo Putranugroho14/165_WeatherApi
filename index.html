@@ -44,6 +44,21 @@
         </div>
     </div>
 
-    
+    <script>
+        $(document).ready(function(){
+            $("#getButton").click(function(){
+                const lokasi = $("#lokasiInput").val();
+
+                if (lokasi.trim() === "") {
+                    alert("Mohon masukkan nama lokasi.");
+                    return;
+                }
+
+                const urlapi = `http://api.weatherapi.com/v1/current.json?key=9d398e88dbf9401fbaf65907250710&q=Indonesia&aqi=no`;
+
+               
+            });
+        });
+    </script>
 </body>
 </html>
