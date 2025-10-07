@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informasi Cuaca</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>
+        body { font-family: sans-serif; margin: 20px; background-color: #f4f4f4; color: #333; }
+        .container { max-width: 600px; margin: auto; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { color: #0056b3; }
+        h3 { border-bottom: 2px solid #0056b3; padding-bottom: 5px; margin-top: 25px; }
+        label { font-weight: bold; }
+        input[type="text"] { padding: 8px; border: 1px solid #ccc; border-radius: 4px; width: 60%; margin-right: 10px; }
+        button { padding: 8px 15px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background-color: #0056b3; }
+        p { margin: 10px 0; line-height: 1.5; }
+        span { font-weight: normal; color: #555; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Cek Cuaca</h1>
+        <div>
+            <label for="lokasiInput">Lokasi:</label>
+            <input type="text" id="lokasiInput" placeholder="Masukkan nama kota">
+            <button id="getButton">GET</button>
+        </div>
+
+        <div id="weatherInfo">
+            <h3>Cuaca</h3>
+            <p>Suhu Celcius: <span id="suhuC">...</span> °C</p>
+            <p>Suhu Fahrenheit: <span id="suhuF">...</span> °F</p>
+            <p>Kelembaban: <span id="kelembaban">...</span> %</p>
+        </div>
+
+        <div id="locationInfo">
+            <h3>Lokasi</h3>
+            <p>Negara: <span id="negara">...</span></p>
+            <p>Provinsi: <span id="provinsi">...</span></p>
+            <p>Kecamatan: <span id="kecamatan">...</span></p>
+            <p>Longitude: <span id="longitude">...</span></p>
+            <p>Latitude: <span id="latitude">...</span></p>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function(){
+            $("#getButton").click(function(){
+                const lokasi = $("#lokasiInput").val();
+
+                if (lokasi.trim() === "") {
+                    alert("Mohon masukkan nama lokasi.");
+                    return;
+                }
+
+                const urlapi = `http://api.weatherapi.com/v1/current.json?key=9d398e88dbf9401fbaf65907250710&q=${lokasi}&aqi=no`;
+
+                $.ajax({
+                    url: urlapi,
+                    method: "GET",
+                    success: function(data){
+                        console.log(data);
+                        // Mengisi data cuaca
+                        $("#suhuC").text(data.current.temp_c);
+                        $("#suhuF").text(data.current.temp_f);
+                        $("#kelembaban").text(data.current.humidity);
+                        
+                        // Mengisi data lokasi
+                        $("#negara").text(data.location.country);
+                        $("#provinsi").text(data.location.region);
+                        $("#kecamatan").text(data.location.name);
+                        $("#longitude").text(data.location.lon);
+                        $("#latitude").text(data.location.lat);
+                    },
+                    error: function(error){
+                        console.log(error);
+                        alert("Lokasi tidak ditemukan atau terjadi kesalahan. Mohon coba nama lokasi lain.");
+                        // Mereset tampilan
+                        $("#suhuC").text("...");
+                        $("#suhuF").text("...");
+                        $("#kelembaban").text("...");
+                        $("#negara").text("...");
+                        $("#provinsi").text("...");
+                        $("#kecamatan").text("...");
+                        $("#longitude").text("...");
+                        $("#latitude").text("...");
+                    },
+                });
+            });
+        });
+    </script>
+</body>
+</html>
